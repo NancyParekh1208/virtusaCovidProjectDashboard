@@ -4,4 +4,4 @@
 ---
 ## Use Cases I have covered
 
-* A general page that shows the real time Statistics by consuming free API'S like 
+* A general page that shows the real time Statistics by consuming free API'S like https://api.covid19india.org/data.json
