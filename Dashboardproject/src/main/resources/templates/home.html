@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+    <title> Patients View</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#"><img th:src="@{https://image.flaticon.com/icons/svg/2659/2659980.svg}" width="37" height="37" alt="">  Covid-19 Dashboard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" sec:authorize="isAuthenticated()">
+        <a class="nav-link" href="#" th:href="@{/logout}">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="jumbotron jumbotron-fluid bg-light text-dark">
+  <div class="container">
+    <h1 class="display-4">Stay Updated About Covid-19</h1>
+    <p class="lead">Apply for movement pass during lockdown and also view the patient reports of your near and dear ones!</p>
+  </div>
+</div>
+<div class="container-fluid">
+<div class="row">
+  <div class="col-sm-4 mb-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Apply for movement pass during Covid-19 lockdown</h5>
+        <p class="card-text">For Migrant Labourers, Student, Essential supplier, etc.</p>
+        <a href="#" th:href="@{/shownewpass}"class="btn btn-primary">Apply Pass</a>
+        <a href="#" th:href="@{/checkPass}"class="btn btn-primary">Check Pass Status</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 mb-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Get Patient Reports</h5>
+        <p class="card-text">View hospitilised patient reports of your dear ones by just the click of a button.</p>
+        <a href="#" th:href="@{/searchPatientForm}" class="btn btn-primary">Request Patient Report</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 mb-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">State wise Details</h5>
+        <p class="card-text">Know the live statistic's of Covid-19 all over India. </p>
+        <a href="#" th:href="@{/statewiselist}"class="btn btn-primary">View Details</a>
+      </div>
+    </div>
+  </div>
+</div></div>
+<div class="container">
+<div class="row mt-4 mb-4">
+<div class="col-sm-6 mb-4"><img th:src="@{https://www.mygov.in/sites/all/themes/mygov/images/covid/symptoms.png}" class="img-fluid" alt="Responsive image"></div>
+<div class="col-sm-6">
+<div class=row>
+<div class="col-sm-12 mb-4"><h2>How it Spreads</h2><img th:src="@{https://www.mygov.in/sites/all/themes/mygov/images/covid/block-one.png}"></div>
+<div class="col-sm-12 mt-4"><h2>Prevention</h2><img th:src="@{https://www.mygov.in/sites/all/themes/mygov/images/covid/block-two.png}"></div>
+</div>
+</div>
+</div> </div>
+<div class="jumbotron text-center" style="margin-bottom:0">
+</div>
+<!--  <a th:href="@{/searchPatientForm}" class="btn btn-primary btn-lg mb-3 mt-4"> Search Patient </a> -->
+ <script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"></script>
+<script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+</body>
+</html>

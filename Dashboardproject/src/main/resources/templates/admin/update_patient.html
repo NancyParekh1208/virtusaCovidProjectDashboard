@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Patient Updation</title>
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#"><img th:src="@{https://image.flaticon.com/icons/svg/2659/2659980.svg}" width="37" height="37" alt="">  Covid-19 Dashboard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" sec:authorize="isAuthenticated()">
+        <a class="nav-link" href="#" th:href="@{/logout}">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+    <div class="container">
+        <h1 class="mt-4">Patient Management System</h1>
+        <hr>
+        <h2>Update Patient</h2>
+
+        <form action="#" th:action="@{/savePatient}" th:object="${patient}" method="POST">
+
+            <!-- Add hidden form field to handle update -->
+            <input type="hidden" th:field="*{id}" />
+
+           <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4">
+
+            <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4">
+			
+            <input type="text" th:field="*{phoneNumber}" class="form-control mb-4 col-4">
+            
+            <input type="text" th:field="*{hospitalName}" class="form-control mb-4 col-4">
+            
+            <input type="text" th:field="*{status}" class="form-control mb-4 col-4">
+
+            <button type="submit" class="btn btn-info col-2"> Update Patient</button>
+        </form>
+
+        <hr>
+
+        <a th:href="@{/admin}"> Back to Patient List</a>
+    </div>
+    <script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"></script>
+<script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

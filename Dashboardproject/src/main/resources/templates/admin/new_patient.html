@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+    <title>Patient Registration System</title>
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+	
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#"><img th:src="@{https://image.flaticon.com/icons/svg/2659/2659980.svg}" width="37" height="37" alt="">  Covid-19 Dashboard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" sec:authorize="isAuthenticated()">
+        <a class="nav-link" href="#" th:href="@{/logout}">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+    <div class="container">
+        <h1 class="mt-4">Patient Management System</h1>
+        <hr>
+        <h2>Save Patient</h2>
+  <form action="#" th:action="@{/savePatient}" th:object="${patient}" method="POST">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="input1">First Name</label>
+      <input type="text" th:field="*{firstName}" class="form-control" id="input1" placeholder="First Name">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="input2">Middle Name</label>
+      <input type="text" th:field="*{middleName}" class="form-control" id="input2" placeholder="Middle Name">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="input3">Last Name</label>
+      <input type="text" th:field="*{lastName}" class="form-control" id="input3" placeholder="Last Name">
+    </div>
+  </div>
+  <div class="form-row">
+  <div class="form-group col-md-8">
+    <label for="inputAddress"> Street Address</label>
+    <input type="text" th:field="*{streetAddress}" class="form-control" id="inputAddress" placeholder="1234 Main St">
+  </div>
+  <div class="form-group col-md-4">
+    <label for="inputgender"> Gender</label>
+    <!--  <input type="text" th:field="*{gender}" class="form-control" id="inputGender" placeholder="Male/Female"> -->
+    <select class="form-control" th:field="*{gender}">
+        <option th:value="'Male'" th:text="'Male'"></option>
+        <option th:value="'Female'" th:text="'Female'"></option>
+    </select> 
+</div>
+</div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">City</label>
+      <input type="text" th:field="*{city}" class="form-control" id="inputCity" placeholder="City">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="state">State</label>
+      <select class="form-control" th:field="*{state}">
+        <option th:value="'Andaman and Nicobar Islands'" th:text="'Andaman and Nicobar Islands'"></option>
+      	<option th:value="'Andhra Pradesh'" th:text="'Andhra Pradesh'"></option>
+      	<option th:value="'Arunachal Pradesh'" th:text="'Arunachal Pradesh'"></option>
+      	<option th:value="'Assam'" th:text="'Assam'"></option>
+      	<option th:value="'Bihar'" th:text="'Bihar'"></option>
+      	<option th:value="'Chandigarh'" th:text="'Chandigarh'"></option>
+        <option th:value="'Chhattisgarh'" th:text="'Chhattisgarh'"></option>
+        <option th:value="'Dadra and Nagar Haveli and
+Daman & Diu'" th:text="'Dadra and Nagar Haveli and
+Daman & Diu'"></option>
+      	<option th:value="'Goa'" th:text="'Goa'"></option>
+      	<option th:value="'Gujarat'" th:text="'Gujarat'"></option>
+      	<option th:value="'Haryana'" th:text="'Haryana'"></option>
+      	<option th:value="'Himachal Pradesh'" th:text="'Himachal Pradesh'"></option>
+      	<option th:value="'Jammu and Kashmir'" th:text="'Jammu and Kashmir'"></option>
+      	<option th:value="'Jharkhand'" th:text="'Jharkhand'"></option>
+      	<option th:value="'Karnataka'" th:text="'Karnataka'"></option>
+      	<option th:value="'Kerala'" th:text="'Kerala'"></option>
+      	<option th:value="'Ladhak'" th:text="'Ladhak'"></option>
+      	<option th:value="'Lakshadweep'" th:text="'Lakshadweep'"></option>
+      	<option th:value="'Madhya Pradesh'" th:text="'Madhya Pradesh'"></option>
+      	<option th:value="'Maharashtra'" th:text="'Maharashtra'"></option>
+      	<option th:value="'Manipur'" th:text="'Manipur'"></option>
+      	<option th:value="'Meghalaya'" th:text="'Meghalaya'"></option>
+      	<option th:value="'Mizoram'" th:text="'Mizoram'"></option>
+      	<option th:value="'Nagaland'" th:text="'Nagaland'"></option>
+      	<option th:value="'Odisha'" th:text="'Odisha'"></option>
+      	<option th:value="'Puducherry'" th:text="'Puducherry'"></option>
+      	<option th:value="'Punjab'" th:text="'Punjab'"></option>
+      	<option th:value="'Rajasthan'" th:text="'Rajasthan'"></option>
+      	<option th:value="'Sikkim'" th:text="'Sikkim'"></option>
+      	<option th:value="'Tamil Nadu'" th:text="'Tamil Nadu'"></option>
+      	<option th:value="'Telangana'" th:text="'Telangana'"></option>
+      	<option th:value="'Tripura'" th:text="'Tripura'"></option>
+      	<option th:value="'Uttarakhand'" th:text="'Uttarakhand'"></option>
+      	<option th:value="'Uttar Pradesh'" th:text="'Uttar Pradesh'"></option>
+      	<option th:value="'West Bengal'" th:text="'West Bengal'"></option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputZip">Zip</label>
+      <input type="text" th:field="*{postalCode}" class="form-control" id="inputZip" placeholder="Zip Code">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="input4">Phone Number</label>
+      <input type="text" th:field="*{phoneNumber}" class="form-control" id="input4" placeholder="phone number">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="input5">Hospital Name</label>
+      <input type="text" th:field="*{hospitalName}" class="form-control" id="input5" placeholder="hospital name">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="input6">Status</label>
+      <input type="text" th:field="*{status}" class="form-control" id="input6" placeholder="covid status">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Save Patient</button>
+</form>
+
+        <hr>
+
+        <a th:href="@{/admin}"> Back to Patient List</a>
+    </div>
+     <script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"></script>
+<script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

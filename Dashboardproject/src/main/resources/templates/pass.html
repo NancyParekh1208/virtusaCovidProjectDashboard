@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+    <title> Patients View</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#"><img th:src="@{https://image.flaticon.com/icons/svg/2659/2659980.svg}" width="37" height="37" alt=""> Covid-19 Dashboard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" sec:authorize="isAuthenticated()">
+        <a class="nav-link" href="#" th:href="@{/logout}">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#" th:href="@{/home}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Apply for E-pass</li>
+  </ol>
+</nav>
+<div class="jumbotron jumbotron-fluid bg-light text-dark">
+  <div class="container">
+  <div class="row">
+  <div class="col-sm-6">
+    <h1 class="display-4">Apply for E-pass!</h1>
+    <p class="lead">Apply for movement pass during lockdown</p>
+    </div>
+    <div class="col-sm-6">
+    <div class="alert alert-info" role="alert">
+ 	 <h4 class="alert-heading">Important !!!</h4>
+  	<p>While applying for your pass please make sure your enter your details correctly.</p>
+ 	 <hr>
+ 	 <p class="mb-0">Also be sure to note down your Pass-Id so that you can track it.</p>
+	</div>
+	</div>
+  </div>
+</div></div>
+<div class="container">
+<div class="row ml-4">
+<form action="#" th:action="@{/savePassRequest}" th:object="${passrequest}" method="POST">
+  <div class="form-row ml-4">
+    <div class="form-group col-md-3">
+      <label for="input1">First Name</label>
+      <input type="text" th:field="*{firstName}" class="form-control" id="input1" placeholder="First Name">
+    </div>
+    <div class="form-group col-md-3">
+      <label for="input2">Last Name</label>
+      <input type="text" th:field="*{lastName}" class="form-control" id="input2" placeholder="Last Name">
+    </div>
+    <div class="form-group col-md-3">
+      <label for="input3">Phone Number</label>
+      <input type="text" th:field="*{phoneNumber}" class="form-control" id="input3" placeholder="Phone Number">
+    </div>
+  </div>
+  <div class="form-row ml-4">
+    <div class="form-group col-md-3">
+      <!--  <label for="input4">Source Name</label>
+      <input type="text" th:field="*{sourceName}" class="form-control" id="input4" placeholder="Source Name"> -->
+      <label for="input4">Source State</label>
+     <select class="form-control" th:field="*{sourceName}">
+        <option th:value="'Andaman and Nicobar Islands'" th:text="'Andaman and Nicobar Islands'"></option>
+      	<option th:value="'Andhra Pradesh'" th:text="'Andhra Pradesh'"></option>
+      	<option th:value="'Arunachal Pradesh'" th:text="'Arunachal Pradesh'"></option>
+      	<option th:value="'Assam'" th:text="'Assam'"></option>
+      	<option th:value="'Bihar'" th:text="'Bihar'"></option>
+      	<option th:value="'Chandigarh'" th:text="'Chandigarh'"></option>
+        <option th:value="'Chhattisgarh'" th:text="'Chhattisgarh'"></option>
+        <option th:value="'Dadra and Nagar Haveli and
+Daman & Diu'" th:text="'Dadra and Nagar Haveli and
+Daman & Diu'"></option>
+      	<option th:value="'Goa'" th:text="'Goa'"></option>
+      	<option th:value="'Gujarat'" th:text="'Gujarat'"></option>
+      	<option th:value="'Haryana'" th:text="'Haryana'"></option>
+      	<option th:value="'Himachal Pradesh'" th:text="'Himachal Pradesh'"></option>
+      	<option th:value="'Jammu and Kashmir'" th:text="'Jammu and Kashmir'"></option>
+      	<option th:value="'Jharkhand'" th:text="'Jharkhand'"></option>
+      	<option th:value="'Karnataka'" th:text="'Karnataka'"></option>
+      	<option th:value="'Kerala'" th:text="'Kerala'"></option>
+      	<option th:value="'Ladhak'" th:text="'Ladhak'"></option>
+      	<option th:value="'Lakshadweep'" th:text="'Lakshadweep'"></option>
+      	<option th:value="'Madhya Pradesh'" th:text="'Madhya Pradesh'"></option>
+      	<option th:value="'Maharashtra'" th:text="'Maharashtra'"></option>
+      	<option th:value="'Manipur'" th:text="'Manipur'"></option>
+      	<option th:value="'Meghalaya'" th:text="'Meghalaya'"></option>
+      	<option th:value="'Mizoram'" th:text="'Mizoram'"></option>
+      	<option th:value="'Nagaland'" th:text="'Nagaland'"></option>
+      	<option th:value="'Odisha'" th:text="'Odisha'"></option>
+      	<option th:value="'Puducherry'" th:text="'Puducherry'"></option>
+      	<option th:value="'Punjab'" th:text="'Punjab'"></option>
+      	<option th:value="'Rajasthan'" th:text="'Rajasthan'"></option>
+      	<option th:value="'Sikkim'" th:text="'Sikkim'"></option>
+      	<option th:value="'Tamil Nadu'" th:text="'Tamil Nadu'"></option>
+      	<option th:value="'Telangana'" th:text="'Telangana'"></option>
+      	<option th:value="'Tripura'" th:text="'Tripura'"></option>
+      	<option th:value="'Uttarakhand'" th:text="'Uttarakhand'"></option>
+      	<option th:value="'Uttar Pradesh'" th:text="'Uttar Pradesh'"></option>
+      	<option th:value="'West Bengal'" th:text="'West Bengal'"></option>
+      	
+      	
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="input5">Destination Name</label>
+      <select class="form-control" th:field="*{destinationName}">
+        <option th:value="'Andaman and Nicobar Islands'" th:text="'Andaman and Nicobar Islands'"></option>
+      	<option th:value="'Andhra Pradesh'" th:text="'Andhra Pradesh'"></option>
+      	<option th:value="'Arunachal Pradesh'" th:text="'Arunachal Pradesh'"></option>
+      	<option th:value="'Assam'" th:text="'Assam'"></option>
+      	<option th:value="'Bihar'" th:text="'Bihar'"></option>
+      	<option th:value="'Chandigarh'" th:text="'Chandigarh'"></option>
+        <option th:value="'Chhattisgarh'" th:text="'Chhattisgarh'"></option>
+        <option th:value="'Dadra and Nagar Haveli and
+Daman & Diu'" th:text="'Dadra and Nagar Haveli and
+Daman & Diu'"></option>
+      	<option th:value="'Goa'" th:text="'Goa'"></option>
+      	<option th:value="'Gujarat'" th:text="'Gujarat'"></option>
+      	<option th:value="'Haryana'" th:text="'Haryana'"></option>
+      	<option th:value="'Himachal Pradesh'" th:text="'Himachal Pradesh'"></option>
+      	<option th:value="'Jammu and Kashmir'" th:text="'Jammu and Kashmir'"></option>
+      	<option th:value="'Jharkhand'" th:text="'Jharkhand'"></option>
+      	<option th:value="'Karnataka'" th:text="'Karnataka'"></option>
+      	<option th:value="'Kerala'" th:text="'Kerala'"></option>
+      	<option th:value="'Ladhak'" th:text="'Ladhak'"></option>
+      	<option th:value="'Lakshadweep'" th:text="'Lakshadweep'"></option>
+      	<option th:value="'Madhya Pradesh'" th:text="'Madhya Pradesh'"></option>
+      	<option th:value="'Maharashtra'" th:text="'Maharashtra'"></option>
+      	<option th:value="'Manipur'" th:text="'Manipur'"></option>
+      	<option th:value="'Meghalaya'" th:text="'Meghalaya'"></option>
+      	<option th:value="'Mizoram'" th:text="'Mizoram'"></option>
+      	<option th:value="'Nagaland'" th:text="'Nagaland'"></option>
+      	<option th:value="'Odisha'" th:text="'Odisha'"></option>
+      	<option th:value="'Puducherry'" th:text="'Puducherry'"></option>
+      	<option th:value="'Punjab'" th:text="'Punjab'"></option>
+      	<option th:value="'Rajasthan'" th:text="'Rajasthan'"></option>
+      	<option th:value="'Sikkim'" th:text="'Sikkim'"></option>
+      	<option th:value="'Tamil Nadu'" th:text="'Tamil Nadu'"></option>
+      	<option th:value="'Telangana'" th:text="'Telangana'"></option>
+      	<option th:value="'Tripura'" th:text="'Tripura'"></option>
+      	<option th:value="'Uttarakhand'" th:text="'Uttarakhand'"></option>
+      	<option th:value="'Uttar Pradesh'" th:text="'Uttar Pradesh'"></option>
+      	<option th:value="'West Bengal'" th:text="'West Bengal'"></option>
+      	
+      	
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="input6">Travel Date</label>
+      <input type="text" th:field="*{travelDate}" class="form-control" id="input6" placeholder="Travel Date">
+    </div>
+    
+  </div>
+ <button type="submit" class="btn btn-primary ml-4">Apply for Pass</button>
+</form>
+</div>
+</div>
+<div class="container">
+<div class="row ml-4">
+<h3 th:text="${success}"></h3>
+<table border="1" class="table table-striped table-responsive-md ml-4 mr-4">
+            <thead>
+                <tr>
+                	<th>Pass ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone Number</th>
+                    <th>Source Name</th>
+                    <th>Destination Name</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+            		<td th:text="${passrequest.id}"></td>
+            		<td th:text="${passrequest.firstName}"></td>
+                    <td th:text="${passrequest.lastName}"></td>
+                    <td th:text="${passrequest.phoneNumber}"></td>
+                    <td th:text="${passrequest.sourceName}"></td>
+                    <td th:text="${passrequest.destinationName}"></td>
+                    <td th:text="${passrequest.status}"></td>
+            </tr>
+            </tbody>
+</table>
+<p class="ml-4"> <a href="#" th:href="@{/checkPass}"class="btn btn-primary">Check Pass Status</a></p>
+</div></div>
+<!--  <h3 th:text="${passrequest.id}"></h3> -->
+
+<!--  <h3 th:text="${result}"></h3><h3 th:text="${passrequest.status}"></h3>-->
+<script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"></script>
+<script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+    <title> Patients View</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css}"/>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#"><img th:src="@{https://image.flaticon.com/icons/svg/2659/2659980.svg}" width="37" height="37" alt="">  Covid-19 Dashboard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" sec:authorize="isAuthenticated()">
+        <a class="nav-link" href="#" th:href="@{/logout}">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#" th:href="@{/home}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Statewise Cases List</li>
+  </ol>
+</nav>
+<div class="container">
+
+<div class="card mb-4 ml-4 mr-4">
+                            <div class="card-header">
+                                <i class="fas fa-table mr-1"></i>
+                                Statewise DataTable 
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>State Name</th>
+                                                <th>Confirmed</th>
+                                                <th>Active</th>
+                                                <th>Deceased</th>
+                                                <th>Recovered</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                <tr th:each="stateStats : ${stateWiseList}">
+                    <th scope="row">
+                        <a th:text="${stateStats.stateName}" th:href="'/states/'+${stateStats.getStateCode()}"></a>
+                    </th>
+                    <td>
+                        <span th:text="${stateStats.confirmed}"></span>
+                        <span class="text-danger" style="font-weight: bold; font-size: 0.75rem; margin: auto;" th:if="${stateStats.getDeltaConfirmed() != '0'}" th:text="' ↑' + ${stateStats.getDeltaConfirmed()}"></span>
+                    </td>
+                    <td th:text="${stateStats.active}"></td>
+                    <td>
+                        <span th:text="${stateStats.deaths}"></span>
+                        <span class="text-secondary" style="font-weight: bold; font-size: 0.75rem; margin: auto;" th:if="${stateStats.getDeltaDeaths() != '0'}" th:text="' ↑' + ${stateStats.getDeltaDeaths()}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${stateStats.getRecovered()}"></span>
+                        <span class="text-success" style="font-weight: bold; font-size: 0.75rem; margin: auto;" th:if="${stateStats.getDeltaRecovered() != '0'}" th:text="' '+'↑' + ${stateStats.getDeltaRecovered()}"></span>
+                    </td>
+                </tr>
+                </tbody>
+ 				</table>
+ 				</div></div></div>
+ 				
+ 				
+ 				
+
+</div>
+
+ <script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"></script>
+<script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+ <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+ <script> 
+ $(document).ready(function() {
+	    $('#dataTable').DataTable();
+	} );
+ </script>
+</body>
+</html>

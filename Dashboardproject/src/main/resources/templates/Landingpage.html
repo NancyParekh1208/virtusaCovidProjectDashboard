@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css}"/> 
+<link rel="stylesheet" th:href="@{https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css}"/>
+<script type="text/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js}"></script>
+<link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.7.0/css/all.css}"/>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<title>Landing Page</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-primary navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#"><img th:src="@{https://image.flaticon.com/icons/svg/2659/2659980.svg}" width="37" height="37" alt="">  Covid-19 Dashboard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+       	<a class="nav-link" href="{@/login}"><i class='fas fa-user'></i>&nbsp;Login</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container-fluid">
+<div class="row">
+	<div class="col-xl-4">
+	<h1 class="mt-4">Live Covid Data</h1>
+	</div>
+</div>	
+	
+	<div class="row">      		
+                            <div class="col-xl-4 col-md-12">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">Confirmed Cases Worldwide<h2 id="data1"></h2></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-12">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body">Total Deaths Worldwide<h2 id="data2"></h2></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-12">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body">Recovered Worldwide<h2 id="data3"></h2></div>
+                                </div>
+                            </div>
+     </div>
+<div class="row">
+<div class="col-xl-4 col-md-12">
+<div class="card text-white mb-4" style="background-color:rgba(255, 159, 64, 0.8)">
+<div class="card-body">Covid-19 Dashboard as on:<h2 id="data8"></h2></div>
+</div>
+</div>
+<div class="col-xl-2 col-md-6">
+<div class="card text-white mb-4" style="background-color:rgba(255, 99, 132, 0.5)">
+<div class="card-body">Total Cases in India<h2 id="data4"></h2></div>
+</div>
+</div>
+<div class="col-xl-2 col-md-6">
+<div class="card text-white mb-4" style="background-color:rgba(54, 162, 235, 0.5)">
+<div class="card-body">Total Recovered in India<h2 id="data5"></h2></div>
+</div>
+</div>
+<div class="col-xl-2 col-md-6">
+<div class="card text-white mb-4" style="background-color:rgba(153, 102, 255, 0.5)">
+<div class="card-body">Total Deaths in India<h2 id="data6"></h2></div>
+</div>
+</div>
+<div class="col-xl-2 col-md-6">
+<div class="card text-white mb-4" style="background-color:rgba(153, 102, 255, 0.5)">
+<div class="card-body">Total Samples Tested<h2 id="data7"></h2></div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-xl-6">
+<div class="card mb-4 ml-4 mr-4">
+                            <div class="card-header">
+                                <i class="fas fa-table mr-1"></i>
+                                Statewise DataTable 
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>State Name</th>
+                                                <th>Confirmed</th>
+                                                <th>Active</th>
+                                                <th>Deceased</th>
+                                                <th>Recovered</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                <tr th:each="stateStats : ${stateWiseList}">
+                    <th scope="row">
+                        <a th:text="${stateStats.stateName}" th:href="'/states/'+${stateStats.getStateCode()}"></a>
+                    </th>
+                    <td>
+                        <span th:text="${stateStats.confirmed}"></span>
+                        <span class="text-danger" style="font-weight: bold; font-size: 0.75rem; margin: auto;" th:if="${stateStats.getDeltaConfirmed() != '0'}" th:text="' ↑' + ${stateStats.getDeltaConfirmed()}"></span>
+                    </td>
+                    <td th:text="${stateStats.active}"></td>
+                    <td>
+                        <span th:text="${stateStats.deaths}"></span>
+                        <span class="text-secondary" style="font-weight: bold; font-size: 0.75rem; margin: auto;" th:if="${stateStats.getDeltaDeaths() != '0'}" th:text="' ↑' + ${stateStats.getDeltaDeaths()}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${stateStats.getRecovered()}"></span>
+                        <span class="text-success" style="font-weight: bold; font-size: 0.75rem; margin: auto;" th:if="${stateStats.getDeltaRecovered() != '0'}" th:text="' '+'↑' + ${stateStats.getDeltaRecovered()}"></span>
+                    </td>
+                </tr>
+                </tbody>
+ 				</table>
+ 				</div></div></div></div>
+ 				<div class="col-12 col-xl-4 d-none d-lg-block">
+ 				<div class="card mb-4">
+ 							<div class="card-header"><i class="fas fa-chart-area mr-1"></i>Top 5 Covid affected States</div>
+    						<div class="card-body"><canvas id="myChart" width="30" height="30"></canvas></div>
+  </div></div>
+    <script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Maharashtra', 'TamilNadu', 'Delhi', 'Karnataka', 'Andhra Pradesh'],
+        datasets: [{
+            label: '# of Confirmed Cases',
+            data: [441228,257613,137677, 134819,158764],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+</div>
+<div class="row"><div class="col-xl-4 ml-4 mb-4"></div>
+ </div></div>				                                       
+ <br>
+ <br>
+ <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+ <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+ <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+ <script> 
+ $(document).ready(function() {
+	    $('#dataTable').DataTable();
+	} );
+ </script>
+ <script type="text/javascript">
+    init()    
+    function init()
+    {
+      var url="https://api.covid19api.com/summary"
+	  var urlindia="https://api.rootnet.in/covid19-in/stats/latest"
+	  var url2="https://api.rootnet.in/covid19-in/stats/testing/latest"
+
+      var data1 = ''
+      var data2 = ''
+      var data3 = ''
+      var data4 = ''
+      var data5 = ''
+      var data6 = ''
+      var data7 = ''
+
+      $.get(url,function(data1){
+        console.log(data1.Global)
+        data1= `
+        <h2>${data1.Global.TotalConfirmed}</h2>
+        `
+        $("#data1").html(data1) 
+      })
+       $.get(url,function(data2){
+        console.log(data2.Global)
+        data2= `
+        <h2>${data2.Global.TotalDeaths}</h2>
+        `
+        $("#data2").html(data2) 
+      })
+       $.get(url,function(data3){
+        console.log(data3.Global)
+        data3= `
+        <h2>${data3.Global.TotalRecovered}</h2>
+        `
+        $("#data3").html(data3) 
+      })
+      $.get(urlindia,function(data4){
+        console.log(data4.data.summary)
+        data4= `
+        <h2>${data4.data.summary.total}</h2>
+        `
+        $("#data4").html(data4) 
+      })
+      $.get(urlindia,function(data5){
+        console.log(data5.data.summary)
+        data5= `
+        <h2>${data5.data.summary.discharged}</h2>
+        `
+        $("#data5").html(data5) 
+      })
+      $.get(urlindia,function(data6){
+        console.log(data6.data.summary)
+        data6= `
+        <h2>${data6.data.summary.deaths}</h2>
+        `
+        $("#data6").html(data6) 
+      })
+      $.get(url2,function(data7){
+        console.log(data7.data)
+        data7= `
+        <h2>${data7.data.totalSamplesTested}</h2>
+        `
+        $("#data7").html(data7) 
+      })
+      $.get(url2,function(data8){
+        console.log(data8.data)
+        data8= `
+        <h2>${data8.data.day}</h2>
+        `
+        $("#data8").html(data8) 
+      })
+    }
+</script>
+<div class="jumbotron text-center" style="margin-bottom:0">
+</div>
+</body>
+</html>
