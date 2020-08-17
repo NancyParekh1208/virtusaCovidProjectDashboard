@@ -2,7 +2,7 @@
 # Covid-19 Interactive Dashboard Application 
 > An interactive dashboard application that shows live covid-19 Statistics of India in tabular format and in charts. An admin dashboard to source patient data to database, manage it and user-friendly interface for the end users to see the patient reports, their covid status and also apply for covid movement pass.
 
-**This Project runs on server 8081**
+**This Project runs on server port 8081**
 
 ## Use Cases that have been covered
 
